@@ -16,3 +16,6 @@ Programming assignment 3 for an undergraduate object-oriented programming course
    2. `std::vector` for `Point`
    3. `std::forward_list` for `Cluster`
    4. `std::vector` for `KMeans`
+   5. `std::unordered_map` to hold the hashed distances
+   6. `Cluster::operator>>` to count exceptions from `Point::operator>>` + public getters
+   
