@@ -2,7 +2,7 @@
 Programming assignment 3 for an undergraduate object-oriented programming course with C++.
 
 #### Notes
-1. ~From [PA3](https://ucdenver.instructure.com/courses/327553/pages/programming-assignment-3)
+1. ~From [PA3](https://ucdenver.instructure.com/courses/327553/pages/programming-assignment-3)~
    1. `Cluster::__id` + generator
    2. `Cluster::Centroid` inner class + private member
    3. `Cluster::Move`
@@ -10,7 +10,7 @@ Programming assignment 3 for an undergraduate object-oriented programming course
    5. `Cluster` score computing functions
    6. `Cluster::operator<<` to include the `Cluster::__id`
    7. `KMeams`
-   8. `Kmeans` score computing function~
+   8. `Kmeans` score computing function
 2. From [PA4](https://ucdenver.instructure.com/courses/327552/pages/programming-assignment-4)
    1. Exceptions
      * `DimensionalityMismatchEx`
