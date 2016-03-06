@@ -13,6 +13,11 @@ Programming assignment 3 for an undergraduate object-oriented programming course
    8. `Kmeans` score computing function
 2. From [PA4](https://ucdenver.instructure.com/courses/327552/pages/programming-assignment-4)
    1. Exceptions
+     * `DimensionalityMismatchEx`
+     * `OutOfBoundsEx`
+     * `RemoveFromEmptyEx`
+     * `OutOfBoundsEx`
+     * `ZeroClustersEx`
    2. `std::vector` for `Point`
    3. `std::forward_list` for `Cluster`
    4. `std::vector` for `KMeans`
