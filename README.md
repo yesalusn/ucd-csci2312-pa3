@@ -151,14 +151,26 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
 2. Define and initialize the `static const char POINT_CLUSTER_ID_DELIM` to `':'`. Use it in your `Cluster::operator>>`.
 
-3. Initialize the new `public Centroid` member. 
+3. Initialize the new `public Centroid` member.
+
+  **Note:** that you can use calls like `c7.centroid.isValid();` in your code.
 
   **Note:** A `Cluster` constructed with a _copy ctor_ has to compute its centroid. Notice that `Centroid::Centroid(const Centroid &)` is **explicitly deleted** disallowing copying of `Centoid` objects. _(This is due to the fact that the private `Cluster` reference in the `Centroid` is explicitly constant and cannot be reassigned. C++ references can only be assigned upon initialization (i.e. in a ctor).)_
 
   **Note:** A `Cluster` assigned to with a `operator=` cannot assignconstructed with a _copy ctor_ has to set its centroid to the centroid of the argument `Cluster` and also set it to valid. Notice that `Centroid::operator=(const Centroid &)` is **explicitly deleted** disallowing copying and assignment of `Centoid` objects.
 
-4. 
+4. When a `KMeans` object is initializing itself (i.e. in the `KMeans::KMeans` constructor), it creates `k` number of clusters (in a dynamic array) and uses the first `Cluster` array element to read the specified data file in. Then it picks `k` number of centroids from the `Point`s of this `Cluster` to set as initial centroids of all `k` `Cluster` array elements. Implement the `Cluster::pickCentroids` method.
 
+  1. The arguments to this method are `k`, the number of clusters, and an already allocated array of `Point`s where to put the selected centroids.
+
+  **Note:** The caller, which in this case is the `KMeans::KMeans` constructor, is respoinsible for allocation of this array. The double pointer `Point **` is required because `Point` has no default constructor. The `KMeans::KMeans` constructor or `KMeans::~KMeans` destructor should deallocate this array.
+  
+  2. When **k >= __size** (the size of the `Cluster`) the first `k` elements of the array should be set to the `Point`s of the `Cluster` and the rest should be set to _infinite points_. See the [Centroid section](https://github.com/ivogeorg/ucd-csci2312-pa3/blob/master/README.md#centoid-class) for an explanation of _infinite points_. The `Point::Point(const Point &)` operator should be used to set the centroids.
+
+  3. When **k < __size** `k` points should be picked from the cluster to set as initial centroids. The algorithm is up to you and you should start by just picking the first `k` points to get things going. Eventually, you might need to pick your centroids better to be able to finish each clustering **within 20 iterations**. _Hint: The best performance is achieved by pickeing points that are far away from each other. You can loop through `k` iterations of an algorithm that picks the farthest point from the set of points already picked._
+
+  4. 
+  
 #### KMeans class
 
 
