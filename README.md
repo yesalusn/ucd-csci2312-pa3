@@ -78,56 +78,32 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 3. `DimensionalityMismatchEx`.
 
   1. Attributes: `__current` is the _dimensionality_ of the current object, `__rhs` is the offending argument.
-  2. Thrown by `Point::distanceTo`, `Point::operator+=`, `Point::operator-=`, `Point::operator<` (and the other comparison operators through it), `Point::operator=`, `Point::operator==` (and the `operator!=` through it), `Point::operator>>`; `Cluster::add` and `Cluster::remove` (and, through them, any other functions or operators which use them), `Cluster::operator+=` and `Cluster::operator-=` (for both `Point` and `Cluster` right-hand sides) (and the simple-arithmetic operators through them), `Cluster::operator==` (and the `operator!=` through it).
+  2. Thrown by `Point::distanceTo`, `Point::operator+=`, `Point::operator-=`, `Point::operator<` (and the other comparison operators through it), `Point::operator=`, `Point::operator==` (and the `operator!=` through it), `Point::operator>>`; `Cluster::add` and `Cluster::remove` (and, through them, any other functions or operators which use them), `Cluster::operator+=` and `Cluster::operator-=` (for both `Point` and `Cluster` right-hand sides) (and, through them, the correspoinding simple-arithmetic operators), `Cluster::operator==` (and the `operator!=` through it).
   3. Caught by user code (test suite).
 
 4. `ZeroClustersEx`.
-5. 
-6. {
-        std::string __name;
+ 
+  1. Attributes: none.
+  2. Thrown by `KMeans::KMeans` constructor when k=0.
+  3. Caught by user code (test suite).
 
-    public:
-        ZeroClustersEx();
-        std::string getName() const;
+5. `DataFileOpenEx`.
 
-        friend std::ostream &operator<<(std::ostream &os, const ZeroClustersEx &ex);
-    };
+  1. Attributes: the data file's `filename`.
+  2. Thrown by `KMeans::KMeans` constructor when the file with such a name cannot be found or can otherwise not be opened.
+  3. Caught by user code (test suite).
 
+6. `ZeroDimensionsEx`.
 
+  1. Attributes: none.
+  2. Thrown by `Point::Point` constructor when d=0. Note that this exception can be thrown by both `Cluster::Cluster` and `KMeans::KMeans` but, since the initialization of both `Cluster` and `KMeans` involves initialization of at least one `Point`, and since this is a fatal condition after which the clustering program cannot proceed, throwing it from `Point::Point` only is _minimalistic design_.
+  3. Caught by user code (test suite).
 
-    class DataFileOpenEx {
-        std::string __name, __filename;
+7. `EmptyClusterEx`.
 
-    public:
-        DataFileOpenEx(std::string filename);
-        std::string getFilename() const;
-        std::string getName() const;
-
-        friend std::ostream &operator<<(std::ostream &os, const DataFileOpenEx &ex);
-    };
-
-
-    class ZeroDimensionsEx {
-        std::string __name;
-
-    public:
-        ZeroDimensionsEx();
-        std::string getName() const;
-
-        friend std::ostream &operator<<(std::ostream &os, const ZeroDimensionsEx &ex);
-    };
-
-
-    class EmptyClusterEx {
-        std::string __name;
-
-    public:
-        EmptyClusterEx();
-        std::string getName() const;
-
-        friend std::ostream &operator<<(std::ostream &os, const EmptyClusterEx &ex);
-    };
-
+  1. Attributes: none.
+  2. Thrown by `Cluster::operator[]` when the cluster is empty.
+  3. Caught by user code (test suite).
 
 #### Point class
 
