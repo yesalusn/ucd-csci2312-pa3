@@ -79,7 +79,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
   1. Attributes: `__current` is the _dimensionality_ of the current object, `__rhs` is the offending argument.
   2. Thrown by `Point::distanceTo`, `Point::operator+=`, `Point::operator-=`, `Point::operator<` (and the other comparison operators through it), `Point::operator=`, `Point::operator==` (and the `operator!=` through it), `Point::operator>>`; `Cluster::add` and `Cluster::remove` (and, through them, any other functions or operators which use them), `Cluster::operator+=` and `Cluster::operator-=` (for both `Point` and `Cluster` right-hand sides) (and, through them, the correspoinding simple-arithmetic operators), `Cluster::operator==` (and the `operator!=` through it).
-  3. Caught by user code (test suite).
+  3. Caught by user code (test suite) and by `Cluster::operator>>` when reading in a data file.
 
 4. `ZeroClustersEx`.
  
@@ -106,6 +106,14 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
   3. Caught by user code (test suite).
 
 #### Point class
+
+1. Throw the indicated exceptions from the indicated methods in the [Exceptions section](https://github.com/ivogeorg/ucd-csci2312-pa3/blob/master/README.md#exceptions).
+
+2. Define and initialize the `static const char POINT_VALUE_DELIM` to `,`. Use it in your `Point::operator>>`.
+
+3. Define the `static void Point::rewindIdGen` method. Use it to rewind the `Point` id generator when a `DimensionalityMismatchEx` is caught in `Cluster::operator>>` when a `Point` cannot read itself. This will ensure the `Point` is-s are sequential and there are no gaps in the sequence due to data file reading problems.
+
+4. Define the `const Point::operator[]`. It is needed by the `KMeans` class.
 
 #### Cluster class
 
