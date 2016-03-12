@@ -109,7 +109,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
 1. Throw the indicated exceptions from the indicated methods in the [Exceptions section](https://github.com/ivogeorg/ucd-csci2312-pa3/blob/master/README.md#exceptions).
 
-2. Define and initialize the `static const char POINT_VALUE_DELIM` to `,`. Use it in your `Point::operator>>`.
+2. Define and initialize the `static const char POINT_VALUE_DELIM` to `','`. Use it in your `Point::operator>>`.
 
 3. Define the `static void Point::rewindIdGen` method. Use it to rewind the `Point` id generator when a `DimensionalityMismatchEx` is caught in `Cluster::operator>>` when a `Point` cannot read itself. This will ensure the `Point` is-s are sequential and there are no gaps in the sequence due to data file reading problems.
 
