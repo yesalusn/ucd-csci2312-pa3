@@ -137,7 +137,9 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
 2. This class is used to encapsulate the _indivisible_ operation of adding a `Point` from one `Cluster` after removing it from another. In our clustering paradigm, all `Point` objects have to "belong" to `Cluster` objects, and do not make sense outside of them.
 
-3. Implement the `Cluster::Move::perform` method and use it in the implementation of `KMeans::run`.
+3. Implement the `Cluster::Move::perform` method and use it in the implementation of `KMeans::run`. 
+
+  **Note:** This should invalidate the centroids of both clusters.
 
 #### Cluster class
 
@@ -181,7 +183,79 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
   2. Runs.
   3. Outputs the results to a file.
 
-2. 
+1. Throw the indicated exceptions from the indicated methods in the [Exceptions section](https://github.com/ivogeorg/ucd-csci2312-pa3/blob/master/README.md#exceptions).
 
+2. Implement the `KMeans::KMeans` constructor. This is where all the initialization and anomaly checking has to happen. Either the constructor throws an exception or after its execution the `KMeans::run` method can safely be called. If any exceptions are to be thrown, any already allocated memory should be deallocated before the `throw` statement.
 
+3. Implement the getters and simple getters. The variables are as follows:
 
+  1. `__maxIter` is the maximum number of iterations the algorithm can run. This is a constructor parameter and has to be observed. Note that this is a **termination condition** for the K-means algorithm.
+
+  2. `__numIter` is the actual number of iterations the algorithm ran. Note that this can be less than `__maxIter` as the points may stop moving between clusters before `__maxIter` iterations have been performed. Note that this is another **termination condition** for the K-means algorithm.
+
+  3. `__numNonemptyClusters` is the number of non-empty clusters before or after the K-means algorithm has run. Note that before running, it's equal to 1, if the initialization in the `KMeans::KMeans` constructor was successful.
+
+  4. `__numMovesLastIter` is the number of moves that were performed during the last iteration of the algorithm. Note that this can be larger than zero if `__maxIter` was set to a number smaller than the minimum iterations necessary for the point movement to stop.
+
+4. Implement the `KMeans::run` method. This is the heart of the algorithm. Here it is _in pseudocode_:
+
+  1. Check if the centroids have been assigned. You can use `assert`.
+
+  2. Initialize locals `moves = 100` a `iter = 0`. These will be used for the termination condition.
+
+  3. `while (moves > 0 and iter < __maxIter)`
+
+    * `moves = 0` // restart the count for the new iteration
+    * `for (c : k clusters)`
+      * `for (p : cluster points)`
+        * Find closest centroid
+        * If it is **not** the centroid of `c`, move `p` to the other cluster. Use a local `Cluster::Move`. `moves ++`
+    * Recompute all invalidated centroids.
+    * `iter ++`
+
+  4. Set the metadata:
+  
+    * `__numIter = iter`
+    * `__numMovesLastIter = moves`
+    * Count non-empty clusters in `nonempty`
+    * `__numNonempty = nonempty`
+
+5. Implement `KMeans::operator<<`. This should write out the results to a file. A file output stream is supplied by the caller. Only nonempty clusters should be written out, in no particular order, in the following format:
+
+   ```
+   48.9819, 47.4258, 52.0498 : 10440
+   49.7811, 49.1227, 51.7090 : 10440
+   50.2934, 48.7180, 51.8880 : 10440
+   50.4146, 48.4508, 51.4070 : 10440
+   51.4925, 48.3226, 51.9171 : 10440
+   13.1473, 45.7105, 46.8457 : 10441
+   12.6223, 51.8332, 48.9889 : 10442
+   13.4091, 51.1114, 51.8555 : 10442
+   13.4349, 49.4999, 51.6522 : 10442
+   13.4117, 47.1157, 51.4740 : 10443
+   13.6196, 45.1573, 52.3948 : 10443
+   13.8807, 47.5944, 55.9948 : 10444
+   15.6523, 46.7538, 55.6698 : 10444
+   14.6511, 48.6109, 45.2570 : 10445
+   14.7062, 48.2472, 47.5892 : 10445
+   14.7980, 48.4135, 47.7455 : 10445
+   15.7419, 48.8970, 47.0186 : 10445
+   14.7341, 46.1872, 42.4663 : 10446
+   14.7637, 47.3621, 49.4916 : 10447
+   14.9784, 49.5267, 49.5483 : 10447
+   15.1096, 50.0164, 48.2296 : 10447
+   15.7378, 49.5870, 50.3862 : 10447
+   15.7588, 50.3209, 49.7688 : 10447
+   16.7001, 49.3881, 50.4152 : 10447
+   15.1601, 49.5503, 53.4565 : 10448
+   15.9976, 49.1623, 51.5173 : 10448
+   16.0302, 50.3806, 52.0563 : 10448
+   16.4739, 49.4711, 52.6637 : 10448
+   15.2441, 56.2196, 48.3763 : 10449
+   15.9123, 54.1316, 48.0258 : 10449
+   17.3475, 54.4616, 48.3485 : 10449
+   15.3573, 43.8995, 47.8981 : 10450
+   15.5129, 49.0171, 42.9764 : 10451
+   16.1129, 48.3082, 43.9640 : 10451
+   17.0414, 48.9724, 44.4231 : 10451
+   ```
