@@ -115,7 +115,49 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
 4. Define the `const Point::operator[]`. It is needed by the `KMeans` class.
 
+#### Centroid class
+
+1. This class is a _private inner_ class of class `Cluster`. This means that:
+
+  1. Objects of class `Centroid` can **only** be declared within the scope of class `Cluster` (declarations and definitions).
+  2. An object of class `Centroid` has _private access_ to an object of class `Cluster`. For this to be useful, a refrence to a `Cluster` object has to be passed as an argument to the `Centroid::Centroid` constructor. See the `Cluster` header.
+
+2. Implement the methods of the inner class `Centroid`. All implementations will be identified by the `Cluster::Centroid::` qualifier.
+
+3. `Cluster::Centroid::equal` only compares the `double` values and ignores the _id_ of the `Point` argument.
+
+4. `Cluster::Centroid::compute` uses the private access to its `Cluster` to compute the _average of its points_.
+
+5. `Cluster::Centroid::set` and `Cluster::Centroid::compute` set the centroid to _valid_.
+
+6. An "infinite" `Point` is used to indicate the centroid of an empty `Cluster`. For the purposes of this assignment, this is defined as a `Point` with all values set to `std::numeric_limits<double>::max()`. 
+
+7. `Cluster::Centroid::toInfinity` sets the centroid to an _infinite point_.
+
+#### Move class
+
+1. This class is a very simple _public inner_ class of class `Cluster`. This means that:
+
+  1. Objects of class `Centroid` can be declared in any scope by using the `Cluster::Move` type.
+  2. An object of class `Move` has _private access_ to an object of class `Cluster`. For this to be useful, a refrence to a `Cluster` object has to be passed as an argument to the `Move::Move` constructor. See the `Cluster` header.
+
+2. This class is used to encapsulate the _indivisible_ operation of adding a `Point` from one `Cluster` after removing it from another. In our clustering paradigm, all `Point` objects have to "belong" to `Cluster` objects, and do not make sense outside of them.
+
+3. Implement the `Cluster::Move::perform` method and use it in the implementation of `KMeans::run`.
+
 #### Cluster class
+
+1. Throw the indicated exceptions from the indicated methods in the [Exceptions section](https://github.com/ivogeorg/ucd-csci2312-pa3/blob/master/README.md#exceptions).
+
+2. Define and initialize the `static const char POINT_CLUSTER_ID_DELIM` to `':'`. Use it in your `Cluster::operator>>`.
+
+3. Initialize the new `public Centroid` member. 
+
+  **Note:** A `Cluster` constructed with a _copy ctor_ has to compute its centroid. Notice that `Centroid::Centroid(const Centroid &)` is **explicitly deleted** disallowing copying of `Centoid` objects. _(This is due to the fact that the private `Cluster` reference in the `Centroid` is explicitly constant and cannot be reassigned. C++ references can only be assigned upon initialization (i.e. in a ctor).)_
+
+  **Note:** A `Cluster` assigned to with a `operator=` cannot assignconstructed with a _copy ctor_ has to set its centroid to the centroid of the argument `Cluster` and also set it to valid. Notice that `Centroid::operator=(const Centroid &)` is **explicitly deleted** disallowing copying and assignment of `Centoid` objects.
+
+4. 
 
 #### KMeans class
 
