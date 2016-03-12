@@ -143,7 +143,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
 1. Throw the indicated exceptions from the indicated methods in the [Exceptions section](https://github.com/ivogeorg/ucd-csci2312-pa3/blob/master/README.md#exceptions).
 
-2. Define and initialize the `static const char POINT_CLUSTER_ID_DELIM` to `':'`. Use it in your `Cluster::operator>>`.
+2. Define and initialize the `static const char POINT_CLUSTER_ID_DELIM` to `':'`. Use it in your `Cluster::operator<<`.
 
 3. Initialize the new `public Centroid` member.
 
@@ -161,18 +161,27 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
   
   2. When **k >= __size** (the size of the `Cluster`) the first `k` elements of the array should be set to the `Point`s of the `Cluster` and the rest should be set to _infinite points_. See the [Centroid section](https://github.com/ivogeorg/ucd-csci2312-pa3/blob/master/README.md#centoid-class) for an explanation of _infinite points_. The `Point::Point(const Point &)` operator should be used to set the centroids.
 
-  3. When **k < __size** `k` points should be picked from the cluster to set as initial centroids. The algorithm is up to you and you should start by just picking the first `k` points to get things going. Eventually, you might need to pick your centroids better to be able to finish each clustering **within 20 iterations**. _Hint: The best performance is achieved by pickeing points that are far away from each other. You can loop through `k` iterations of an algorithm that picks the farthest point from the set of points already picked._
+  3. When **k < __size** `k` points should be picked from the cluster to set as initial centroids. The algorithm is up to you and you should start by just picking the first `k` points to get things going. Eventually, you might need to pick your centroids better to be able to finish each K-means clustering test **within 20 iterations**. _Hint: The best performance is achieved by pickeing points that are far away from each other. You can loop through `k` iterations of an algorithm that picks the farthest point from the set of points already picked._
 
   4. This is a great use case for the `std::set` class.
+
+5. Implement cluster id-s through the `static unsigned int` id generator, just like you did for `Point`.
+
+6. Modify `Cluster::operator<<` to output the cluster id after each point, as follows:
+
+   ```
+   2.30000, 5.60000, 0.00000, 5.60000, 7.90000 : 6093
+   ```
   
 #### KMeans class
 
-* * * 
+1. The `KMeans` class does three things:
 
-** UNDER DEVELOPMENT **
+  1. Initializes itself.
+  2. Runs.
+  3. Outputs the results to a file.
 
-* * * 
-
+2. 
 
 
 
