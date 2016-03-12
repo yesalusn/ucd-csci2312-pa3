@@ -65,6 +65,76 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
 * * * 
 
+#### Exceptions
+
+1. All the exceptions that you need to implement are declared in the <tt>Exceptions.h</tt> file. They are very simple classes, which hold some environment data, if any, to report back to the handler when thrown. They also hold their `name` so that the test suite handlers can make sure the correct exception is thrown in expected anomalous situations. They also print themselves to a stream, so an informative message can be reported and/or logged.
+
+2. `OutOfBoundsEx`.
+
+  1. Attributes: `__current` is the _size_ of the current object, `__rhs` is the offending argument.
+  2. Thrown by `Point::setValue`, `Point::getValue`, `Point::operator[]`, `Cluster::operator[]`.
+  3. Caught by user code (test suite).
+
+3. `DimensionalityMismatchEx`.
+
+  1. Attributes: `__current` is the _dimensionality_ of the current object, `__rhs` is the offending argument.
+  2. Thrown by `Point::distanceTo`, `Point::operator+=`, `Point::operator-=`, `Point::operator<` (and the other comparison operators through it), `Point::operator=`, `Point::operator==` (and the `operator!=` through it), `Point::operator>>`; `Cluster::add` and `Cluster::remove` (and, through them, any other functions or operators which use them), `Cluster::operator+=` and `Cluster::operator-=` (for both `Point` and `Cluster` right-hand sides) (and the simple-arithmetic operators through them), `Cluster::operator==` (and the `operator!=` through it).
+  3. Caught by user code (test suite).
+
+4. `ZeroClustersEx`.
+5. 
+6. {
+        std::string __name;
+
+    public:
+        ZeroClustersEx();
+        std::string getName() const;
+
+        friend std::ostream &operator<<(std::ostream &os, const ZeroClustersEx &ex);
+    };
+
+
+
+    class DataFileOpenEx {
+        std::string __name, __filename;
+
+    public:
+        DataFileOpenEx(std::string filename);
+        std::string getFilename() const;
+        std::string getName() const;
+
+        friend std::ostream &operator<<(std::ostream &os, const DataFileOpenEx &ex);
+    };
+
+
+    class ZeroDimensionsEx {
+        std::string __name;
+
+    public:
+        ZeroDimensionsEx();
+        std::string getName() const;
+
+        friend std::ostream &operator<<(std::ostream &os, const ZeroDimensionsEx &ex);
+    };
+
+
+    class EmptyClusterEx {
+        std::string __name;
+
+    public:
+        EmptyClusterEx();
+        std::string getName() const;
+
+        friend std::ostream &operator<<(std::ostream &os, const EmptyClusterEx &ex);
+    };
+
+
 #### Point class
+
+#### Cluster class
+
+#### KMeans class
+
+
 
 
