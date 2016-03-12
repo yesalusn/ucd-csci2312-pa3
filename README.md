@@ -209,7 +209,9 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
     * `for (c : k clusters)`
       * `for (p : cluster points)`
         * Find closest centroid
-        * If it is **not** the centroid of `c`, move `p` to the other cluster. Use a local `Cluster::Move`. `moves ++`
+        * If it is **not** the centroid of `c`
+          * Move `p` to the other cluster. Use a local `Cluster::Move`
+          * `moves ++`
     * Recompute all invalidated centroids.
     * `iter ++`
 
