@@ -13,12 +13,6 @@ _exceptions, inner classes, k-means clustering_
 5. Continue using git and Github.
 6. Develop good coding style.
 
-* * * 
-
-** REQUIREMENTS UNDER DEVELOPMENT **
-
-* * * 
-
 ### Synopsis
 
 PA3 bribgs you to the culmination of our work with points, asking you to implement the K-means algorithm for clustering multidimensional real-valued points. Most of the functionality of your `Point` and `Cluster` classes will be used as is, with some key extensions to `Cluster`. Extensive exception coverage will fortify the program's interface. The actual clustering algorithm will be implemented in a new class, `KMeans`. You have to write four files, <tt>Point.cpp</tt>, <tt>Cluster.cpp</tt>, <tt>KMeans.cpp</tt>, and <tt>Exceptions.cpp</tt>. See the [Detailed Instructions](https://github.com/ivogeorg/ucd-csci2312-pa3/blob/master/README.md#detailed-instructions) at the bottom of this file.
@@ -65,5 +59,12 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
 ### Detailed Instructions
 
-** UNDER DEVELOPMENT **
+* * * 
+
+** REQUIREMENTS UNDER DEVELOPMENT **
+
+* * * 
+
+#### Point class
+
 
