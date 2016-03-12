@@ -59,12 +59,6 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
 ### Detailed Instructions
 
-* * * 
-
-** REQUIREMENTS UNDER DEVELOPMENT **
-
-* * * 
-
 #### Exceptions
 
 1. All the exceptions that you need to implement are declared in the <tt>Exceptions.h</tt> file. They are very simple classes, which hold some environment data, if any, to report back to the handler when thrown. They also hold their `name` so that the test suite handlers can make sure the correct exception is thrown in expected anomalous situations. They also print themselves to a stream, so an informative message can be reported and/or logged.
@@ -169,9 +163,15 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
   3. When **k < __size** `k` points should be picked from the cluster to set as initial centroids. The algorithm is up to you and you should start by just picking the first `k` points to get things going. Eventually, you might need to pick your centroids better to be able to finish each clustering **within 20 iterations**. _Hint: The best performance is achieved by pickeing points that are far away from each other. You can loop through `k` iterations of an algorithm that picks the farthest point from the set of points already picked._
 
-  4. 
+  4. This is a great use case for the `std::set` class.
   
 #### KMeans class
+
+* * * 
+
+** UNDER DEVELOPMENT **
+
+* * * 
 
 
 
