@@ -130,10 +130,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
 #### Move class
 
-1. This class is a very simple _public inner_ class of class `Cluster`. This means that:
-
-  1. Objects of class `Move` can be declared in any scope by using the `Cluster::Move` type.
-  2. An object of class `Move` has _private access_ to an object of class `Cluster`. For this to be useful, a reference to a `Cluster` object has to be passed as an argument to the `Move::Move` constructor. See the `Cluster` header.
+1. This class is a very simple _public inner_ class of class `Cluster`. This means that objects of class `Move` can be declared in any scope by using the `Cluster::Move` type.
 
 2. This class is used to encapsulate the _indivisible_ operation of adding a `Point` from one `Cluster` after removing it from another. In our clustering paradigm, all `Point` objects have to "belong" to `Cluster` objects, and do not make sense outside of them.
 
