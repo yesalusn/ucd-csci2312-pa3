@@ -159,7 +159,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
   1. The arguments to this method are `k`, the number of clusters, and an already allocated array of `Point`s where to put the selected centroids.
 
-  **Note:** The caller, which in this case is the `KMeans::KMeans` constructor, is respoinsible for allocation of this array. The double pointer `Point **` is required because `Point` has no default constructor. The `KMeans::KMeans` constructor or `KMeans::~KMeans` destructor should deallocate this array.
+  **Note:** The caller, which in this case is the `KMeans::KMeans` constructor, is respoinsible for allocation of this array. The double pointer `Point **` is because `Point` has no default constructor and we cannot declare a static array of `Point`s. `KMeans::KMeans` constructor or `KMeans::~KMeans` destructor should deallocate this array.
   
   2. When **k >= __size** (the size of the `Cluster`) the first `k` elements of the array should be set to the `Point`s of the `Cluster` and the rest should be set to _infinite points_. See the [Centroid section](https://github.com/ivogeorg/ucd-csci2312-pa3/blob/master/README.md#centoid-class) for an explanation of _infinite points_. The `Point::Point(const Point &)` operator should be used to set the centroids.
 
