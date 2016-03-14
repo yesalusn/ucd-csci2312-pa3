@@ -114,7 +114,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 1. This class is a _private inner_ class of class `Cluster`. This means that:
 
   1. Objects of class `Centroid` can **only** be declared within the scope of class `Cluster` (declarations and definitions).
-  2. An object of class `Centroid` has _private access_ to an object of class `Cluster`. For this to be useful, a refrence to a `Cluster` object has to be passed as an argument to the `Centroid::Centroid` constructor. See the `Cluster` header.
+  2. An object of class `Centroid` has _private access_ to an object of class `Cluster`. For this to be useful, a reference to a `Cluster` object has to be passed as an argument to the `Centroid::Centroid` constructor. See the `Cluster` header.
 
 2. Implement the methods of the inner class `Centroid`. All implementations will be identified by the `Cluster::Centroid::` qualifier.
 
@@ -130,16 +130,13 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
 #### Move class
 
-1. This class is a very simple _public inner_ class of class `Cluster`. This means that:
-
-  1. Objects of class `Centroid` can be declared in any scope by using the `Cluster::Move` type.
-  2. An object of class `Move` has _private access_ to an object of class `Cluster`. For this to be useful, a refrence to a `Cluster` object has to be passed as an argument to the `Move::Move` constructor. See the `Cluster` header.
+1. This class is a very simple _public inner_ class of class `Cluster`. This means that objects of class `Move` can be declared in any scope by using the `Cluster::Move` type.
 
 2. This class is used to encapsulate the _indivisible_ operation of adding a `Point` from one `Cluster` after removing it from another. In our clustering paradigm, all `Point` objects have to "belong" to `Cluster` objects, and do not make sense outside of them.
 
 3. Implement the `Cluster::Move::perform` method and use it in the implementation of `KMeans::run`. 
 
-  **Note:** This should invalidate the centroids of both clusters.
+  **Note:** This method should invalidate the centroids of both clusters.
 
 #### Cluster class
 
@@ -149,7 +146,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
 3. Initialize the new `public Centroid` member.
 
-  **Note:** that you can use calls like `c7.centroid.isValid();` in your code.
+  **Note:** You can now use calls like `c7.centroid.isValid();` in your code.
 
   **Note:** A `Cluster` constructed with a _copy ctor_ has to compute its centroid. Notice that `Centroid::Centroid(const Centroid &)` is **explicitly deleted** disallowing copying of `Centoid` objects. _(This is due to the fact that the private `Cluster` reference in the `Centroid` is explicitly constant and cannot be reassigned. C++ references can only be assigned upon initialization (i.e. in a ctor).)_
 
@@ -159,7 +156,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
   1. The arguments to this method are `k`, the number of clusters, and an already allocated array of `Point`s where to put the selected centroids.
 
-  **Note:** The caller, which in this case is the `KMeans::KMeans` constructor, is respoinsible for allocation of this array. The double pointer `Point **` is required because `Point` has no default constructor. The `KMeans::KMeans` constructor or `KMeans::~KMeans` destructor should deallocate this array.
+  **Note:** The caller, which in this case is the `KMeans::KMeans` constructor, is respoinsible for allocation of this array. The double pointer `Point **` is because `Point` has no default constructor and we cannot declare a static array of `Point`s. `KMeans::KMeans` constructor or `KMeans::~KMeans` destructor should deallocate this array.
   
   2. When **k >= __size** (the size of the `Cluster`) the first `k` elements of the array should be set to the `Point`s of the `Cluster` and the rest should be set to _infinite points_. See the [Centroid section](https://github.com/ivogeorg/ucd-csci2312-pa3/blob/master/README.md#centoid-class) for an explanation of _infinite points_. The `Point::Point(const Point &)` operator should be used to set the centroids.
 
